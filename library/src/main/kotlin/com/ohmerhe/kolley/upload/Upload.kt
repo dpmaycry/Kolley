@@ -94,8 +94,8 @@ class UploadRequest(url: String, errorListener: Response.ErrorListener?)
         }
 
         // close multipart form data after text and file data
-        dos.writeBytes(boundaryPrefixed + MultipartUtils.BOUNDARY_PREFIX)
-        dos.writeBytes(MultipartUtils.CRLF)
+        dos.write((boundaryPrefixed + MultipartUtils.BOUNDARY_PREFIX).toByteArray())
+        dos.write(MultipartUtils.CRLF.toByteArray())
     }
 
     @Throws(IOException::class)
@@ -141,6 +141,6 @@ class UploadRequest(url: String, errorListener: Response.ErrorListener?)
             bytesRead = fileInputStream.read(buffer, 0, bufferSize)
         }
 
-        dataOutputStream.writeBytes(MultipartUtils.CRLF)
+        dataOutputStream.write(MultipartUtils.CRLF.toByteArray())
     }
 }
